@@ -10,7 +10,7 @@ Add "bundle" tag to your .cshtml page e.g.:
     
 Add gulpfileBundleConfig.json to the root of your project which will contain all the bundle data, e.g.:
 
-  {
+ {
   "DestFolder": "wwwroot/Bundles",
   "BundleAndMinifyInDebug": false, 
 
@@ -19,12 +19,13 @@ Add gulpfileBundleConfig.json to the root of your project which will contain all
     {
       "BundleName": "site",
       "CssSourceFiles": [
-        "wwwroot/css/site.css",
-        "wwwroot/css/someSampleCss.css",
+        "wwwroot/lib/bootstrap/dist/css/bootstrap.min.css",
+        "wwwroot/css/site.css"
       ],
       "JsSourceFiles": [
-        "wwwroot/js/site.js",
-        "wwwroot/css/someSampleJs.css",
+        "wwwroot/lib/jquery/dist/jquery.min.js",
+        "wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js",
+        "wwwroot/js/site.js"
       ]
     }
 
@@ -44,4 +45,6 @@ The following needs to be done the first time only:
     "ts-node": "10.9.1"
 4. Add/edit file "tsconfig.json" at the project root and add the following to the "include" section:
      "gulpfile.ts"
-7. 
+5. Add NuGet package "Newtonsoft.Json"
+6. Add file "BundleTagHelper.cs" to the folder "TagHelpers" at the project root.
+7. Lastly, and I'm not sure why, we need to open the "Task Runner Explorer" -> Gulpfile.ts -> right click bundle-and-minify -> Bindings -> endure "After Build" is selected
