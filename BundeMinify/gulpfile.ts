@@ -1,4 +1,4 @@
-/// <binding AfterBuild='default' />
+/// <binding AfterBuild='bundle-and-minify' />
 /// <reference types="./gulpfile" />
 
 import gulp = require('gulp');
@@ -87,10 +87,9 @@ function createJsTask(bundleName: string, sourceFiles: string[]) {
     GULP
 */
 
-gulp.task('session-start', (cb) => {
+gulp.task('bundle-and-minify', (cb) => {
     if (_bundleAndMinify) {
         return gulp.series(_cleanupTaskNames, _cssTaskNames, _jsTaskNames)(cb);
     }
+    return cb();
 });
-
-gulp.task('default', gulp.series('session-start'));
