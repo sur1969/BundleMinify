@@ -47,4 +47,6 @@ The following needs to be done the first time only:
      "gulpfile.ts"
 5. Add NuGet package "Newtonsoft.Json"
 6. Add file "BundleTagHelper.cs" to the folder "TagHelpers" at the project root.
-7. Lastly, and I'm not sure why, we need to open the "Task Runner Explorer" -> Gulpfile.ts -> right click bundle-and-minify -> Bindings -> endure "After Build" is selected
+7. Consume tag helpers for your project by editing file /Pages/_ViewImports.cshtml and adding:
+     @addTagHelper *, <project name>
+8. Lastly, and I'm not sure why, we need to open the "Task Runner Explorer" -> Gulpfile.ts -> right click bundle-and-minify -> Bindings -> ensure "After Build" is selected
