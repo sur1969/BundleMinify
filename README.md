@@ -1,14 +1,14 @@
 # Bunde & Minify
 
-# How it works
+# Getting it to work!
 
-By adding a simple tag to your .cshtml page you can reference a css or js bundle. In Debug mode it will output the links for each file while in Release mode it will bundle and minify the files.
+Add a "bundle" tag to your .cshtml page to reference a css or js bundle. In Debug mode it will output the links for each file while in Release mode it will bundle and minify the files.
 
-Add a tag to your .cshtml page e.g.: 
+Add "bundle" tag to your .cshtml page e.g.: 
   For css:     <bundle bundleName="site" bundleType="css"></bundle>
   For js:      <bundle bundleName="site" bundleType="js"></bundle>
     
-Add gulpfileBundleConfig.json to the root of your project containing the bundles, e.g.:
+Add gulpfileBundleConfig.json to the root of your project which will contain all the bundle data, e.g.:
 
   {
   "DestFolder": "wwwroot/Bundles",
@@ -31,6 +31,7 @@ Add gulpfileBundleConfig.json to the root of your project containing the bundles
   ]
 }
 
-When in Debug configuration it WILL NOT bundle and minify your css and js files (this can be overriden for testing).
-When in Release configuration it WILL bundle and minify your css and js files.
-Css and Js configuration is done 
+The following needs to be done the first time only:
+1. Add file gulpfile.d.ts to the root of your project
+2. Add file gulpfile.ts to the root of your project
+3. 
