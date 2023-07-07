@@ -1,0 +1,21 @@
+{
+  "DestFolder": "wwwroot/Bundles",
+  "BundleAndMinifyInDebug": false, 
+
+  "Bundles": [
+
+    {
+      "BundleName": "site",
+      "CssSourceFiles": [
+        "wwwroot/lib/bootstrap/dist/css/bootstrap.min.css",
+        "wwwroot/css/site.css"
+      ],
+      "JsSourceFiles": [
+        "wwwroot/lib/jquery/dist/jquery.min.js",
+        "wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js",
+        "wwwroot/js/site.js"
+      ]
+    }
+
+  ]
+}
