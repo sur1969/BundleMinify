@@ -1,5 +1,3 @@
-
-
 # Bundle & Minify Css and Javascript
 
 None of the .net 7.0 bundle & minification solutions worked. We needed something simple so that when we're in Debug mode, the individual files are output to enable debugging but in Release mode the files are bundled and minified.
@@ -41,7 +39,8 @@ Add [gulpfileBundleConfig.json](https://github.com/sur1969/BundeMinify/blob/mast
  
 *Note, wildcards in file paths are not currently supported.*
 
-**The painful part follows but only needs to be done once:**
+## The painful part follows but only needs to be done once:
+
 1. Add files [gulpfile.d.ts](https://github.com/sur1969/BundeMinify/blob/master/BundeMinify/gulpfile.d.ts)  and [gulpfile.ts](https://github.com/sur1969/BundeMinify/blob/master/BundeMinify/gulpfile.ts) to the root of your project
 2. Add Pre-build event to store build configuration i.e. Debug or Release :
 
@@ -49,6 +48,12 @@ Add [gulpfileBundleConfig.json](https://github.com/sur1969/BundeMinify/blob/mast
 > event -> enter the following command:
 > 
 >      echo {"BuildConfig" : "$(ConfigurationName)"} > ./gulpfileBuildConfig.json
+**IMPORTANT :**  pre/post build events don’t run when the project is considered up-to-date. When you change from Debug to Release or vice versa, **you will need to do a re-build**.
+
+Alternatively, to always run pre/post build events you should unload the project and add the following to the PropertyGroup section:
+
+      <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
+
 3. Add/edit file **package.json** at the project root and add the following to the **devDependencies** section: 
 >     "gulp": "4.0.2",
 >     "gulp-concat": "2.6.1",
@@ -68,4 +73,3 @@ Add [gulpfileBundleConfig.json](https://github.com/sur1969/BundeMinify/blob/mast
 >  @addTagHelper *, [your project assembly name]
 9. Lastly, and I'm not sure why, we need to open the Task Runner Explorer and do this:
 find file **Gulpfile.ts** -> right click **bundle-and-minify** -> Bindings -> check that **After Build** is selected.
-
