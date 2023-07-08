@@ -8,7 +8,6 @@ namespace BundeMinify.TagHelpers
     {
         private static BuildConfigDTO? _buildConfig; // this will tell us which configuration we're in i.e Debug or Release
         private static BundleConfigDTO? _bundleConfig;  // this will hold the bundles
-
         private bool _bundledAndMinified;
 
         private readonly IFileVersionProvider _fileVersionProvider;

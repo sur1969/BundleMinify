@@ -14,26 +14,23 @@ const _jsTaskNames: string[] = [];
 
 const _buildConfig: BuildConfigDTO = require('./gulpfileBuildConfig.json'); // this will tell us which configuration we're in i.e Debug or Release
 const _bundleConfig: BundleConfigDTO = require('./gulpfileBundleConfig.json'); // this will hold the bundles
-
 const _bundleAndMinify: boolean = _bundleConfig.BundleAndMinifyInDebug || !_buildConfig.BuildConfig.startsWith("Debug");
 
-if (_bundleAndMinify) {
-
-    for (let i = 0; i < _bundleConfig.Bundles.length; i++) {
-        const bundle = _bundleConfig.Bundles[i];
-
-        if (bundle.CssFiles && bundle.CssFiles.length > 0) {
-            createCssTask(bundle.Name, bundle.CssFiles);
-        }
-
-        if (bundle.JsFiles && bundle.JsFiles.length > 0) {
-            createJsTask(bundle.Name, bundle.JsFiles);
-        }
-    }
-}
 
 gulp.task('bundle-and-minify', (cb) => {
     if (_bundleAndMinify) {
+        for (let i = 0; i < _bundleConfig.Bundles.length; i++) {
+            const bundle = _bundleConfig.Bundles[i];
+
+            if (bundle.CssFiles && bundle.CssFiles.length > 0) {
+                createCssTask(bundle.Name, bundle.CssFiles);
+            }
+
+            if (bundle.JsFiles && bundle.JsFiles.length > 0) {
+                createJsTask(bundle.Name, bundle.JsFiles);
+            }
+        }
+
         return gulp.series(_cleanupTaskNames, _cssTaskNames, _jsTaskNames)(cb);
     }
     else {
