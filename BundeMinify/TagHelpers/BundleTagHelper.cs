@@ -35,16 +35,16 @@ namespace BundeMinify.TagHelpers
 
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
-            string bundleName = output.Attributes["bundleName"]?.Value.ToString()?.ToLower() ?? "";
+            string bundleName = output.Attributes["name"]?.Value.ToString()?.ToLower() ?? "";
             if (string.IsNullOrWhiteSpace(bundleName))
             {
-                throw new Exception("bundleName is a required attribute");
+                throw new Exception("name attribute missing from bundle tag");
             }
 
-            string bundleType = output.Attributes["bundleType"]?.Value.ToString()?.ToLower() ?? "";
+            string bundleType = output.Attributes["type"]?.Value.ToString()?.ToLower() ?? "";
             if (string.IsNullOrWhiteSpace(bundleType) && bundleType != "css" && bundleType != "js")
             {
-                throw new Exception("bundleType is a required attribute and must be either css or js");
+                throw new Exception("type attribute missing from bundle tag - must be either css or js");
             }
 
             BundleDTO bundle = GetBundle(bundleName, bundleType);
