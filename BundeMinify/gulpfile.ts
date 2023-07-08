@@ -12,15 +12,15 @@ const _cssTaskNames: string[] = [];
 const _jsTaskNames: string[] = [];
 
 
-const _gulpfileBuildConfig: BuildConfigDTO = require('./gulpfileBuildConfig.json'); // this will tell us which configuration we're in i.e Debug or Release
-const _gulpfileBundleConfig: BundleConfigDTO = require('./gulpfileBundleConfig.json'); // this will hold the bundles
+const _buildConfig: BuildConfigDTO = require('./gulpfileBuildConfig.json'); // this will tell us which configuration we're in i.e Debug or Release
+const _bundleConfig: BundleConfigDTO = require('./gulpfileBundleConfig.json'); // this will hold the bundles
 
-const _bundleAndMinify: boolean = _gulpfileBundleConfig.BundleAndMinifyInDebug || !_gulpfileBuildConfig.BuildConfig.startsWith("Debug");
+const _bundleAndMinify: boolean = _bundleConfig.BundleAndMinifyInDebug || !_buildConfig.BuildConfig.startsWith("Debug");
 
 if (_bundleAndMinify) {
 
-    for (let i = 0; i < _gulpfileBundleConfig.Bundles.length; i++) {
-        const bundle = _gulpfileBundleConfig.Bundles[i];
+    for (let i = 0; i < _bundleConfig.Bundles.length; i++) {
+        const bundle = _bundleConfig.Bundles[i];
 
         if (bundle.CssFiles && bundle.CssFiles.length > 0) {
             createCssTask(bundle.Name, bundle.CssFiles);
@@ -52,7 +52,7 @@ function createCssTask(bundleName: string, files: string[]) {
         return gulp.src(files)
             .pipe(concat(destFileName))
             .pipe(cleanCss())
-            .pipe(gulp.dest(_gulpfileBundleConfig.DestFolder));
+            .pipe(gulp.dest(_bundleConfig.DestFolder));
     });
     _cssTaskNames.push(destFileName);
 
@@ -74,7 +74,7 @@ function createJsTask(bundleName: string, files: string[]) {
         return gulp.src(files)
             .pipe(concat(destFileName))
             .pipe(uglify())
-            .pipe(gulp.dest(_gulpfileBundleConfig.DestFolder));
+            .pipe(gulp.dest(_bundleConfig.DestFolder));
     });
     _jsTaskNames.push(destFileName);
 

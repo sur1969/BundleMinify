@@ -6,8 +6,8 @@ namespace BundeMinify.TagHelpers
 {
     public class BundleTagHelper : TagHelper
     {
-        private static BuildConfigDTO? _gulpfileBuildConfig; // this will tell us which configuration we're in i.e Debug or Release
-        private static BundleConfigDTO? _gulpfileBundleConfig;  // this will hold the bundles
+        private static BuildConfigDTO? _buildConfig; // this will tell us which configuration we're in i.e Debug or Release
+        private static BundleConfigDTO? _bundleConfig;  // this will hold the bundles
 
         private bool _bundledAndMinified;
 
@@ -19,18 +19,18 @@ namespace BundeMinify.TagHelpers
 
             // read gulpfileBuildConfig.json - always read in debug mode
 
-            if (_gulpfileBuildConfig == null || _gulpfileBuildConfig!.BuildConfig.StartsWith("Debug"))
+            if (_buildConfig == null || _buildConfig!.BuildConfig.StartsWith("Debug"))
             {
-                _gulpfileBuildConfig = ReadJsonFile<BuildConfigDTO>("gulpfileBuildConfig.json");
+                _buildConfig = ReadJsonFile<BuildConfigDTO>("gulpfileBuildConfig.json");
             }
 
 
             // read gulpfileBundleConfig.json - always read in debug mode
 
-            if (_gulpfileBundleConfig == null || _gulpfileBuildConfig!.BuildConfig.StartsWith("Debug"))
+            if (_bundleConfig == null || _buildConfig!.BuildConfig.StartsWith("Debug"))
             {
-                _gulpfileBundleConfig = ReadJsonFile<BundleConfigDTO>("gulpfileBundleConfig.json");
-                _bundledAndMinified = _gulpfileBundleConfig.BundleAndMinifyInDebug || !_gulpfileBuildConfig!.BuildConfig.StartsWith("Debug");
+                _bundleConfig = ReadJsonFile<BundleConfigDTO>("gulpfileBundleConfig.json");
+                _bundledAndMinified = _bundleConfig.BundleAndMinifyInDebug || !_buildConfig!.BuildConfig.StartsWith("Debug");
             }
         }
 
@@ -76,7 +76,7 @@ namespace BundeMinify.TagHelpers
         {
             try
             {
-                var bundles = _gulpfileBundleConfig!.Bundles;
+                var bundles = _bundleConfig!.Bundles;
                 if (bundles == null || bundles.Length == 0)
                 {
                     throw new Exception("No bundles found in gulpfileBundleConfig.json");
@@ -104,7 +104,7 @@ namespace BundeMinify.TagHelpers
 
             if (_bundledAndMinified)
             {
-                string href = $"{RemoveWwwrootFromPath(_gulpfileBundleConfig!.DestFolder)}/{bundle.Name}.min.css";
+                string href = $"{RemoveWwwrootFromPath(_bundleConfig!.DestFolder)}/{bundle.Name}.min.css";
                 href = _fileVersionProvider.AddFileVersionToPath(null, href);
                 html = $"<link rel='stylesheet' href='{href}'>";
             }
@@ -127,7 +127,7 @@ namespace BundeMinify.TagHelpers
 
             if (_bundledAndMinified)
             {
-                string src = $"{RemoveWwwrootFromPath(_gulpfileBundleConfig!.DestFolder)}/{bundle.Name}.min.js";
+                string src = $"{RemoveWwwrootFromPath(_bundleConfig!.DestFolder)}/{bundle.Name}.min.js";
                 src = _fileVersionProvider.AddFileVersionToPath(null, src);
                 html = $"<script src='{src}'></script>";
             }
