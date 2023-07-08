@@ -9,7 +9,7 @@ type BundleConfigDTO = {
 }
 
 type BundleDTO = {
-    BundleName: string;
-    CssSourceFiles?: string[];
-    JsSourceFiles?: string[];
+    Name: string;
+    CssFiles?: string[];
+    JsFiles?: string[];
 }

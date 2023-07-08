@@ -82,10 +82,10 @@ namespace BundeMinify.TagHelpers
                     throw new Exception("No bundles found in gulpfileBundleConfig.json");
                 }
 
-                var bundle = bundles.FirstOrDefault(b => b.BundleName.ToLower() == bundleName);
+                var bundle = bundles.FirstOrDefault(b => b.Name.ToLower() == bundleName);
                 if (bundle == null ||
-                    (bundleType == "css" && bundle.CssSourceFiles.Length == 0) ||
-                    (bundleType == "js" && bundle.JsSourceFiles.Length == 0))
+                    (bundleType == "css" && bundle.CssFiles.Length == 0) ||
+                    (bundleType == "js" && bundle.JsFiles.Length == 0))
                 {
                     throw new Exception($"Could not find {bundleType} bundle with name {bundleName}");
                 }
@@ -104,13 +104,13 @@ namespace BundeMinify.TagHelpers
 
             if (_bundledAndMinified)
             {
-                string href = $"{RemoveWwwrootFromPath(_gulpfileBundleConfig!.DestFolder)}/{bundle.BundleName}.min.css";
+                string href = $"{RemoveWwwrootFromPath(_gulpfileBundleConfig!.DestFolder)}/{bundle.Name}.min.css";
                 href = _fileVersionProvider.AddFileVersionToPath(null, href);
                 html = $"<link rel='stylesheet' href='{href}'>";
             }
             else
             {
-                foreach (string sourceFile in bundle.CssSourceFiles)
+                foreach (string sourceFile in bundle.CssFiles)
                 {
                     string href = RemoveWwwrootFromPath(sourceFile);
                     href = _fileVersionProvider.AddFileVersionToPath(null, href);
@@ -127,13 +127,13 @@ namespace BundeMinify.TagHelpers
 
             if (_bundledAndMinified)
             {
-                string src = $"{RemoveWwwrootFromPath(_gulpfileBundleConfig!.DestFolder)}/{bundle.BundleName}.min.js";
+                string src = $"{RemoveWwwrootFromPath(_gulpfileBundleConfig!.DestFolder)}/{bundle.Name}.min.js";
                 src = _fileVersionProvider.AddFileVersionToPath(null, src);
                 html = $"<script src='{src}'></script>";
             }
             else
             {
-                foreach (string sourceFile in bundle.JsSourceFiles)
+                foreach (string sourceFile in bundle.JsFiles)
                 {
                     string src = RemoveWwwrootFromPath(sourceFile);
                     src = _fileVersionProvider.AddFileVersionToPath(null, src);
@@ -162,8 +162,8 @@ namespace BundeMinify.TagHelpers
 
     public class BundleDTO
     {
-        public string BundleName { get; set; } = "";
-        public string[] CssSourceFiles { get; set; } = Array.Empty<string>();
-        public string[] JsSourceFiles { get; set; } = Array.Empty<string>();
+        public string Name { get; set; } = "";
+        public string[] CssFiles { get; set; } = Array.Empty<string>();
+        public string[] JsFiles { get; set; } = Array.Empty<string>();
     }
 }

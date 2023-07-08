@@ -22,12 +22,12 @@ if (_bundleAndMinify) {
     for (let i = 0; i < _gulpfileBundleConfig.Bundles.length; i++) {
         const bundle = _gulpfileBundleConfig.Bundles[i];
 
-        if (bundle.CssSourceFiles && bundle.CssSourceFiles.length > 0) {
-            createCssTask(bundle.BundleName, bundle.CssSourceFiles);
+        if (bundle.CssFiles && bundle.CssFiles.length > 0) {
+            createCssTask(bundle.Name, bundle.CssFiles);
         }
 
-        if (bundle.JsSourceFiles && bundle.JsSourceFiles.length > 0) {
-            createJsTask(bundle.BundleName, bundle.JsSourceFiles);
+        if (bundle.JsFiles && bundle.JsFiles.length > 0) {
+            createJsTask(bundle.Name, bundle.JsFiles);
         }
     }
 }
@@ -46,10 +46,10 @@ gulp.task('bundle-and-minify', (cb) => {
     CSS
 */
 
-function createCssTask(bundleName: string, sourceFiles: string[]) {
+function createCssTask(bundleName: string, files: string[]) {
     const destFileName = `${bundleName}.min.css`;
     gulp.task(destFileName, () => {
-        return gulp.src(sourceFiles)
+        return gulp.src(files)
             .pipe(concat(destFileName))
             .pipe(cleanCss())
             .pipe(gulp.dest(_gulpfileBundleConfig.DestFolder));
@@ -68,10 +68,10 @@ function createCssTask(bundleName: string, sourceFiles: string[]) {
     JAVASCRIPT
 */
 
-function createJsTask(bundleName: string, sourceFiles: string[]) {
+function createJsTask(bundleName: string, files: string[]) {
     const destFileName = `${bundleName}.min.js`;
     gulp.task(destFileName, () => {
-        return gulp.src(sourceFiles)
+        return gulp.src(files)
             .pipe(concat(destFileName))
             .pipe(uglify())
             .pipe(gulp.dest(_gulpfileBundleConfig.DestFolder));

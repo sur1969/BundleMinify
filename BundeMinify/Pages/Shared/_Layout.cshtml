@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - BundeMinify</title>
 
-    <bundle bundleName="site" bundleType="css"></bundle>
+    <bundle name="site" type="css"></bundle>
 
     <link rel="stylesheet" href="~/BundeMinify.styles.css" asp-append-version="true" />
 </head>
@@ -43,7 +43,7 @@
         </div>
     </footer>
 
-    <bundle bundleName="site" bundleType="js"></bundle>
+    <bundle name="site" type="js"></bundle>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
