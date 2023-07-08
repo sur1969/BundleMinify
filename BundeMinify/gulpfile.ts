@@ -20,8 +20,7 @@ const _jsTaskNames: string[] = [];
 const _gulpfileBuildConfig: BuildConfigDTO = require('./gulpfileBuildConfig.json');
 const _gulpfileBundleConfig: BundleConfigDTO = require('./gulpfileBundleConfig.json');
 
-const _isDebug: boolean = _gulpfileBuildConfig.BuildConfig.startsWith("Debug");
-const _bundleAndMinify: boolean = !_isDebug || _gulpfileBundleConfig.BundleAndMinifyInDebug;
+const _bundleAndMinify: boolean = _gulpfileBundleConfig.BundleAndMinifyInDebug || !_gulpfileBuildConfig.BuildConfig.startsWith("Debug");
 
 if (_bundleAndMinify) {
 

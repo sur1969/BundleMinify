@@ -363,3 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 /BundeMinify/package-lock.json
 /BundeMinify/gulpfile.js
+/BundeMinify/gulpfile.js.map

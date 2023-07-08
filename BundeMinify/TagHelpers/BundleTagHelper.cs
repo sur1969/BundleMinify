@@ -7,26 +7,30 @@ namespace BundeMinify.TagHelpers
     public class BundleTagHelper : TagHelper
     {
         private readonly IFileVersionProvider _fileVersionProvider;
+
         private static BuildConfigDTO? _gulpfileBuildConfig;
         private static BundleConfigDTO? _gulpfileBundleConfig;
+
+        private bool _bundledAndMinified;
 
         public BundleTagHelper(IFileVersionProvider fileVersionProvider)
         {
             _fileVersionProvider = fileVersionProvider;
 
-            // read file gulpfileBuildConfig.json
+            // read file gulpfileBuildConfig.json - always read in debug mode
 
-            if (_gulpfileBuildConfig == null)
+            if (_gulpfileBuildConfig == null || _gulpfileBuildConfig!.BuildConfig.StartsWith("Debug"))
             {
                 _gulpfileBuildConfig = ReadJsonFile<BuildConfigDTO>("gulpfileBuildConfig.json");
             }
 
 
-            // read file gulpfileBundleConfig.json
+            // read file gulpfileBundleConfig.json - always read in debug mode
 
-            if (_gulpfileBundleConfig == null)
+            if (_gulpfileBundleConfig == null || _gulpfileBuildConfig!.BuildConfig.StartsWith("Debug"))
             {
                 _gulpfileBundleConfig = ReadJsonFile<BundleConfigDTO>("gulpfileBundleConfig.json");
+                _bundledAndMinified = _gulpfileBundleConfig.BundleAndMinifyInDebug || !_gulpfileBuildConfig!.BuildConfig.StartsWith("Debug");
             }
         }
 
@@ -98,7 +102,7 @@ namespace BundeMinify.TagHelpers
         {
             string html = "";
 
-            if (IsBundledAndMinified())
+            if (_bundledAndMinified)
             {
                 string href = $"{RemoveWwwrootFromPath(_gulpfileBundleConfig!.DestFolder)}/{bundle.BundleName}.min.css";
                 href = _fileVersionProvider.AddFileVersionToPath(null, href);
@@ -121,7 +125,7 @@ namespace BundeMinify.TagHelpers
         {
             string html = "";
 
-            if (IsBundledAndMinified())
+            if (_bundledAndMinified)
             {
                 string src = $"{RemoveWwwrootFromPath(_gulpfileBundleConfig!.DestFolder)}/{bundle.BundleName}.min.js";
                 src = _fileVersionProvider.AddFileVersionToPath(null, src);
@@ -138,12 +142,6 @@ namespace BundeMinify.TagHelpers
             }
 
             return html;
-        }
-
-        private static bool IsBundledAndMinified()
-        {
-            bool isDebug = _gulpfileBuildConfig!.BuildConfig.StartsWith("Debug");
-            return !isDebug || _gulpfileBundleConfig!.BundleAndMinifyInDebug;
         }
 
         private static string RemoveWwwrootFromPath(string path) => path.Replace("wwwroot/", "");
