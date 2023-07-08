@@ -1,13 +1,13 @@
 # Bundle & Minify Css and Javascript
 
-None of the .net 7.0 bundle & minification solutions worked. We needed something simple - when in Debug mode we wanted the raw files to enable easy debugging and in Release mode we wanted the files bundled and minified.
+None of the .net 7.0 bundle & minification solutions worked. We needed something simple so that when we're in Debug mode, the individual files are output to enable debugging but in Release mode the files are bundled and minified.
 
-## Just show me how to get it working!
+## How to get it working!
 
 Add a "bundle" tag to your .cshtml page to reference a css or js bundle.
 
-	For css:	<bundle bundleName="site" bundleType="css"></bundle>
-	For js:		<bundle bundleName="site" bundleType="js"></bundle>
+	For css:	<bundle name="site" type="css"></bundle>
+	For js:		<bundle name="site" type="js"></bundle>
 
 Add **gulpfileBundleConfig.json** to the root of your project containing the bundle data, e.g.:
 
@@ -18,12 +18,12 @@ Add **gulpfileBundleConfig.json** to the root of your project containing the bun
       "Bundles": [
     
         {
-          "BundleName": "site",
-          "CssSourceFiles": [
+          "Name": "site",
+          "CssFiles": [
             "wwwroot/lib/bootstrap/dist/css/bootstrap.min.css",
             "wwwroot/css/site.css"
           ],
-          "JsSourceFiles": [
+          "JsFiles": [
             "wwwroot/lib/jquery/dist/jquery.min.js",
             "wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js",
             "wwwroot/js/site.js"
