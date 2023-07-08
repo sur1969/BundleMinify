@@ -32,6 +32,15 @@ if (_bundleAndMinify) {
     }
 }
 
+gulp.task('bundle-and-minify', (cb) => {
+    if (_bundleAndMinify) {
+        return gulp.series(_cleanupTaskNames, _cssTaskNames, _jsTaskNames)(cb);
+    }
+    else {
+        return cb();
+    }
+});
+
 
 /*
     CSS
@@ -75,15 +84,3 @@ function createJsTask(bundleName: string, sourceFiles: string[]) {
     });
     _cleanupTaskNames.push(cleanupTaskName);
 }
-
-
-/*
-    GULP
-*/
-
-gulp.task('bundle-and-minify', (cb) => {
-    if (_bundleAndMinify) {
-        return gulp.series(_cleanupTaskNames, _cssTaskNames, _jsTaskNames)(cb);
-    }
-    return cb();
-});
