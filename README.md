@@ -38,6 +38,8 @@ Add [gulpfileBundleConfig.json](https://github.com/sur1969/BundeMinify/blob/mast
     
       ]
     }
+ 
+*Note, wildcards in file paths are not currently supported.*
 
 **The painful part follows but only needs to be done once:**
 1. Add files [gulpfile.d.ts](https://github.com/sur1969/BundeMinify/blob/master/BundeMinify/gulpfile.d.ts)  and [gulpfile.ts](https://github.com/sur1969/BundeMinify/blob/master/BundeMinify/gulpfile.ts) to the root of your project
