@@ -29,8 +29,9 @@ namespace BundeMinify.TagHelpers
             if (_bundleConfig == null || _buildConfig!.BuildConfig.StartsWith("Debug"))
             {
                 _bundleConfig = ReadJsonFile<BundleConfigDTO>("gulpfileBundleConfig.json");
-                _bundledAndMinified = _bundleConfig.BundleAndMinifyInDebug || !_buildConfig!.BuildConfig.StartsWith("Debug");
             }
+
+            _bundledAndMinified = _bundleConfig.BundleAndMinifyInDebug || !_buildConfig!.BuildConfig.StartsWith("Debug");
         }
 
         public override void Process(TagHelperContext context, TagHelperOutput output)
