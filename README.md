@@ -37,7 +37,7 @@ Add [gulpfileBundleConfig.json](https://github.com/sur1969/BundeMinify/blob/mast
       ]
     }
  
-*Note, wildcards in file paths are not currently supported.*
+*Note, wildcards in file paths are not currently supported. Either or both of CssFIles and JsFIles need specified.*
 
 ## The painful part follows but only needs to be done once:
 
