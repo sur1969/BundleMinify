@@ -6,8 +6,8 @@ namespace BundeMinify.TagHelpers
 {
     public class BundleTagHelper : TagHelper
     {
-        private static BuildConfigDTO? _gulpfileBuildConfig;
-        private static BundleConfigDTO? _gulpfileBundleConfig;
+        private static BuildConfigDTO? _gulpfileBuildConfig; // this will tell us which configuration we're in i.e Debug or Release
+        private static BundleConfigDTO? _gulpfileBundleConfig;  // this will hold the bundles
 
         private bool _bundledAndMinified;
 
@@ -17,7 +17,7 @@ namespace BundeMinify.TagHelpers
         {
             _fileVersionProvider = fileVersionProvider;
 
-            // read file gulpfileBuildConfig.json - always read in debug mode
+            // read gulpfileBuildConfig.json - always read in debug mode
 
             if (_gulpfileBuildConfig == null || _gulpfileBuildConfig!.BuildConfig.StartsWith("Debug"))
             {
@@ -25,7 +25,7 @@ namespace BundeMinify.TagHelpers
             }
 
 
-            // read file gulpfileBundleConfig.json - always read in debug mode
+            // read gulpfileBundleConfig.json - always read in debug mode
 
             if (_gulpfileBundleConfig == null || _gulpfileBuildConfig!.BuildConfig.StartsWith("Debug"))
             {

@@ -12,13 +12,8 @@ const _cssTaskNames: string[] = [];
 const _jsTaskNames: string[] = [];
 
 
-/*
-    Read gulpfileBuildConfig.json - this will tell us which configuration we're in i.e Debug or Release
-    Read gulpfileBundleConfig.json - this will hold the bundles
-*/
-
-const _gulpfileBuildConfig: BuildConfigDTO = require('./gulpfileBuildConfig.json');
-const _gulpfileBundleConfig: BundleConfigDTO = require('./gulpfileBundleConfig.json');
+const _gulpfileBuildConfig: BuildConfigDTO = require('./gulpfileBuildConfig.json'); // this will tell us which configuration we're in i.e Debug or Release
+const _gulpfileBundleConfig: BundleConfigDTO = require('./gulpfileBundleConfig.json'); // this will hold the bundles
 
 const _bundleAndMinify: boolean = _gulpfileBundleConfig.BundleAndMinifyInDebug || !_gulpfileBuildConfig.BuildConfig.startsWith("Debug");
 
