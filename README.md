@@ -68,7 +68,7 @@ Alternatively, to always run pre/post build events you should unload the project
         ]
 
 6. Add NuGet package **Newtonsoft.Json**
-7. Add file [BundleTagHelper.cs](https://github.com/sur1969/BundeMinify/blob/master/BundeMinify/TagHelpers/BundleTagHelper.cs) to folder **TagHelpers** at the project root.
+7. Add file [BundleTagHelper.cs](https://github.com/sur1969/BundeMinify/blob/master/BundeMinify/TagHelpers/BundleTagHelper.cs) to folder **TagHelpers** at the project root. Update namespace to match your project.
 8. Consume this tag helper for your project by editing file **/Pages/_ViewImports.cshtml** and adding:
 >  @addTagHelper *, [your project assembly name]
 9. Lastly, and I'm not sure why, we need to open the Task Runner Explorer and do this:
