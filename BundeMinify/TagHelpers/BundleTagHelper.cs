@@ -97,6 +97,11 @@ namespace BundeMinify.TagHelpers
             }
         }
 
+
+        /*
+            CSS
+        */
+
         private string CreateCssTags(BundleDTO bundle)
         {
             string html = "";
@@ -119,6 +124,11 @@ namespace BundeMinify.TagHelpers
 
             return html;
         }
+
+
+        /*
+            JAVASCRIPT
+        */
 
         private string CreateJsTags(BundleDTO bundle)
         {
@@ -146,6 +156,10 @@ namespace BundeMinify.TagHelpers
         private static string RemoveWwwrootFromPath(string path) => path.Replace("wwwroot/", "");
     }
 
+
+    /*
+        DTOs
+    */
 
     public class BuildConfigDTO
     {
