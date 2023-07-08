@@ -1,4 +1,5 @@
 
+
 # Bundle & Minify Css and Javascript
 
 None of the .net 7.0 bundle & minification solutions worked. We needed something simple so that when we're in Debug mode, the individual files are output to enable debugging but in Release mode the files are bundled and minified.
@@ -14,7 +15,7 @@ When bundled this will output:
     <link rel="stylesheet" href="Bundles/site.min.css?v=...">
     <script src="Bundles/site.min.js?v=..."></script>
 
-Add **gulpfileBundleConfig.json** to the root of your project containing the bundle data, e.g.:
+Add [gulpfileBundleConfig.json](https://github.com/sur1969/BundeMinify/blob/master/BundeMinify/gulpfileBundleConfig.json) to the root of your project containing the bundle data, e.g.:
 
     {
       "DestFolder": "wwwroot/Bundles",
