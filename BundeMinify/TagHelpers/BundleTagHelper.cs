@@ -6,12 +6,12 @@ namespace BundeMinify.TagHelpers
 {
     public class BundleTagHelper : TagHelper
     {
-        private readonly IFileVersionProvider _fileVersionProvider;
-
         private static BuildConfigDTO? _gulpfileBuildConfig;
         private static BundleConfigDTO? _gulpfileBundleConfig;
 
         private bool _bundledAndMinified;
+
+        private readonly IFileVersionProvider _fileVersionProvider;
 
         public BundleTagHelper(IFileVersionProvider fileVersionProvider)
         {
