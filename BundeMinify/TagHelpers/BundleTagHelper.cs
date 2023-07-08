@@ -38,13 +38,13 @@ namespace BundeMinify.TagHelpers
             string bundleName = output.Attributes["name"]?.Value.ToString()?.ToLower() ?? "";
             if (string.IsNullOrWhiteSpace(bundleName))
             {
-                throw new Exception("name attribute missing from bundle tag");
+                throw new Exception("'name' attribute missing from bundle tag");
             }
 
             string bundleType = output.Attributes["type"]?.Value.ToString()?.ToLower() ?? "";
             if (string.IsNullOrWhiteSpace(bundleType) && bundleType != "css" && bundleType != "js")
             {
-                throw new Exception("type attribute missing from bundle tag - must be either css or js");
+                throw new Exception("'type' attribute missing from bundle tag - must be either css or js");
             }
 
             BundleDTO bundle = GetBundle(bundleName, bundleType);
@@ -65,7 +65,7 @@ namespace BundeMinify.TagHelpers
             string filePath = Path.Combine(Directory.GetCurrentDirectory(), fileName);
             if (!File.Exists(filePath))
             {
-                throw new Exception($"{fileName} not found");
+                throw new Exception($"'{fileName}' not found");
             }
             string json = File.ReadAllText(filePath);
             return JsonConvert.DeserializeObject<T>(json)!;
@@ -73,28 +73,21 @@ namespace BundeMinify.TagHelpers
 
         private static BundleDTO GetBundle(string bundleName, string bundleType)
         {
-            try
+            var bundles = _bundleConfig!.Bundles;
+            if (bundles == null || bundles.Length == 0)
             {
-                var bundles = _bundleConfig!.Bundles;
-                if (bundles == null || bundles.Length == 0)
-                {
-                    throw new Exception("No bundles found in gulpfileBundleConfig.json");
-                }
-
-                var bundle = bundles.FirstOrDefault(b => b.Name.ToLower() == bundleName);
-                if (bundle == null ||
-                    (bundleType == "css" && bundle.CssFiles.Length == 0) ||
-                    (bundleType == "js" && bundle.JsFiles.Length == 0))
-                {
-                    throw new Exception($"Could not find {bundleType} bundle with name {bundleName}");
-                }
-
-                return bundle;
+                throw new Exception("No bundles found in 'gulpfileBundleConfig.json'");
             }
-            catch (Exception)
+
+            var bundle = bundles.FirstOrDefault(b => b.Name.ToLower() == bundleName);
+            if (bundle == null ||
+                (bundleType == "css" && bundle.CssFiles.Length == 0) ||
+                (bundleType == "js" && bundle.JsFiles.Length == 0))
             {
-                throw new Exception("Could not read gulpfileBundleConfig.json");
+                throw new Exception($"Could not find {bundleType} bundle with name '{bundleName}'");
             }
+
+            return bundle;
         }
 
 
