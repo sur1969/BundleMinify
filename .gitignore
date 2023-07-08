@@ -366,3 +366,4 @@ FodyWeavers.xsd
 /BundeMinify/gulpfile.js.map
 /BundeMinify/wwwroot/Bundles/site.min.css
 /BundeMinify/wwwroot/Bundles/site.min.js
+/BundeMinify/gulpfileBuildConfig.json
