@@ -110,9 +110,9 @@ namespace BundeMinify.TagHelpers
             {
                 foreach (string sourceFile in bundle.CssFiles)
                 {
-                    string href = RemoveWwwrootFromPath(sourceFile);
+                    string href = $"/{RemoveWwwrootFromPath(sourceFile)}";
                     href = _fileVersionProvider.AddFileVersionToPath(null, href);
-                    html += $"<link rel='stylesheet' href='/{href}'>" + Environment.NewLine;
+                    html += $"<link rel='stylesheet' href='{href}'>" + Environment.NewLine;
                 }
             }
 
@@ -138,9 +138,9 @@ namespace BundeMinify.TagHelpers
             {
                 foreach (string sourceFile in bundle.JsFiles)
                 {
-                    string src = RemoveWwwrootFromPath(sourceFile);
+                    string src = $"/{RemoveWwwrootFromPath(sourceFile)}";
                     src = _fileVersionProvider.AddFileVersionToPath(null, src);
-                    html += $"<script src='/{src}'></script>" + Environment.NewLine;
+                    html += $"<script src='{src}'></script>" + Environment.NewLine;
                 }
             }
 
