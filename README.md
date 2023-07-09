@@ -4,7 +4,7 @@ The .net 7.0 bundling & minification solution didn't work - I'm looking at you W
 
 ## How to get it working!
 
-Add a **bundle** tag to your .cshtml page to reference a css or javascript bundle.
+Add a **bundle** tag to your .cshtml page to reference a css or javascript bundle. e.g.
 
 	For css:	<bundle name="site" type="css"></bundle>
 	For js:		<bundle name="site" type="js"></bundle>
