@@ -37,7 +37,7 @@ Add [gulpfileBundleConfig.json](https://github.com/sur1969/BundeMinify/blob/mast
       ]
     }
  
-*Note, wildcards in file paths are not supported. Any updates to this file will **require a re-build** for any changes to take effect.*  
+*Note, wildcards in file paths are not supported. Any updates to this file will **require a Rebuild** for any changes to take effect.*  
 **BundleFolder** : the folder that bundles will be saved to.  
 **BundleConfigs** : the configurations when bundling will happen. By adding "Debug" to this list you can view bundling in action while in the Debug configuration.  
 **Bundles** : the list of bundles. Each bundle should have a unique name. A bundle can consist of either or both of CssFile and JsFiles.  
@@ -51,7 +51,7 @@ Add [gulpfileBundleConfig.json](https://github.com/sur1969/BundeMinify/blob/mast
 > event -> enter the following command:
 > 
 >      echo {"BuildConfig" : "$(ConfigurationName)"} > ./gulpfileBuildConfig.json
-**IMPORTANT :**  pre/post build events don’t run when the project is considered up-to-date. When you change from Debug to Release or vice versa, **you will need to do a re-build**.
+**IMPORTANT :**  pre/post build events don’t run when the project is considered up-to-date. When you change from Debug to Release or vice versa, **you will need to do a Rebuild**.
 
 Alternatively, to always run pre/post build events you should unload the project and add the following to the PropertyGroup section:
 
