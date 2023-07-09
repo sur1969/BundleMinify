@@ -1,6 +1,6 @@
 # Bundle & Minify Css and Javascript
 
-None of the .net 7.0 bundle & minification solutions worked. We needed something simple so that when we're in Debug mode, the individual files are output to enable debugging but in Release mode the files are bundled and minified.
+The .net 7.0 bundling & minification solution didn't work - I'm looking at you WebOptimizer. Our requirement was simple, bundle & minify files in Release config and **do not** when in Debug config.
 
 ## How to get it working!
 
@@ -16,8 +16,8 @@ When bundled this will output:
 Add [gulpfileBundleConfig.json](https://github.com/sur1969/BundeMinify/blob/master/BundeMinify/gulpfileBundleConfig.json) to the root of your project containing the bundle data, e.g.:
 
     {
-      "DestFolder": "wwwroot/Bundles",
-      "BundleAndMinifyInDebug": false, 
+      "BundleFolder": "wwwroot/Bundles",
+      "BundleConfigs": [ "Release" ], 
     
       "Bundles": [
     
@@ -38,6 +38,8 @@ Add [gulpfileBundleConfig.json](https://github.com/sur1969/BundeMinify/blob/mast
     }
  
 *Note, wildcards in file paths are not currently supported. Either or both of CssFIles and JsFIles need specified.*
+Option **"BundleFolder"** : specify the folder that all bundles will be saved to.
+Option **"BundleConfigs"** : The list of configurations when bundling will happen. By adding "Debug" to this list you can view bundling in action while in the Debug configuration.
 
 ## The painful part follows but only needs to be done once:
 
@@ -71,5 +73,5 @@ Alternatively, to always run pre/post build events you should unload the project
 6. Add file [BundleTagHelper.cs](https://github.com/sur1969/BundeMinify/blob/master/BundeMinify/TagHelpers/BundleTagHelper.cs) to folder **TagHelpers** at the project root. Update namespace to match your project.
    Consume this tag helper for your project by editing file **/Pages/_ViewImports.cshtml** and adding:
 >  @addTagHelper *, [your project assembly name]
-7. Lastly, and I'm not sure why, we need to open the Task Runner Explorer and do this:
-find file **Gulpfile.ts** -> right click **bundle-and-minify** -> Bindings -> check that **After Build** is selected.
+7. Lastly, check the "bundle-and-minify" task is setup correctly:
+Open **Task Runner Explorer** -> Gulpfile.ts -> Tasks -> right click **bundle-and-minify** -> Bindings -> check that **After Build** is selected.
