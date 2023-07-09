@@ -31,7 +31,7 @@ namespace BundeMinify.TagHelpers
                 _bundleConfig = ReadJsonFile<BundleConfigDTO>("gulpfileBundleConfig.json");
             }
 
-            _bundledAndMinified = _bundleConfig.BundleAndMinifyInDebug || !_buildConfig!.BuildConfig.StartsWith("Debug");
+            _bundledAndMinified = _bundleConfig.BundleConfigs.Contains(_buildConfig.BuildConfig);
         }
 
         public override void Process(TagHelperContext context, TagHelperOutput output)
@@ -102,7 +102,7 @@ namespace BundeMinify.TagHelpers
 
             if (_bundledAndMinified)
             {
-                string href = $"{RemoveWwwrootFromPath(_bundleConfig!.DestFolder)}/{bundle.Name}.min.css";
+                string href = $"{RemoveWwwrootFromPath(_bundleConfig!.BundleFolder)}/{bundle.Name}.min.css";
                 href = _fileVersionProvider.AddFileVersionToPath(null, href);
                 html = $"<link rel='stylesheet' href='{href}'>";
             }
@@ -130,7 +130,7 @@ namespace BundeMinify.TagHelpers
 
             if (_bundledAndMinified)
             {
-                string src = $"{RemoveWwwrootFromPath(_bundleConfig!.DestFolder)}/{bundle.Name}.min.js";
+                string src = $"{RemoveWwwrootFromPath(_bundleConfig!.BundleFolder)}/{bundle.Name}.min.js";
                 src = _fileVersionProvider.AddFileVersionToPath(null, src);
                 html = $"<script src='{src}'></script>";
             }
@@ -162,8 +162,8 @@ namespace BundeMinify.TagHelpers
 
     public class BundleConfigDTO
     {
-        public string DestFolder { get; set; } = "";
-        public bool BundleAndMinifyInDebug { get; set; }
+        public string BundleFolder { get; set; } = "";
+        public string[] BundleConfigs { get; set; } = Array.Empty<string>();
         public BundleDTO[] Bundles { get; set; } = Array.Empty<BundleDTO>();
     }
 

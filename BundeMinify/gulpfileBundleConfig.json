@@ -1,6 +1,6 @@
 {
-  "DestFolder": "wwwroot/Bundles",
-  "BundleAndMinifyInDebug": false, 
+  "BundleFolder": "wwwroot/Bundles",
+  "BundleConfigs": [ "Release" ],
 
   "Bundles": [
 

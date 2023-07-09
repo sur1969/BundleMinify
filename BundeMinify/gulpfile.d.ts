@@ -3,8 +3,8 @@
 }
 
 type BundleConfigDTO = {
-    DestFolder: string;
-    BundleAndMinifyInDebug: boolean;
+    BundleFolder: string;
+    BundleConfigs: string[];
     Bundles: BundleDTO[];
 }
 
