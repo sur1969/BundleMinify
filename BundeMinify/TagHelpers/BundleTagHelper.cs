@@ -8,7 +8,7 @@ namespace BundeMinify.TagHelpers
     {
         private static BuildConfigDTO? _buildConfig; // this will tell us which configuration we're in i.e Debug or Release
         private static BundleConfigDTO? _bundleConfig;  // this will hold the bundles
-        private bool _bundledAndMinified;
+        private static bool _bundledAndMinified;
 
         private readonly IFileVersionProvider _fileVersionProvider;
 
@@ -16,22 +16,31 @@ namespace BundeMinify.TagHelpers
         {
             _fileVersionProvider = fileVersionProvider;
 
-            // read gulpfileBuildConfig.json - always read in debug mode
+            // read gulpfileBuildConfig.json
 
-            if (_buildConfig == null || _buildConfig!.BuildConfig.StartsWith("Debug"))
+            if (_buildConfig == null)
             {
                 _buildConfig = ReadJsonFile<BuildConfigDTO>("gulpfileBuildConfig.json");
             }
 
 
-            // read gulpfileBundleConfig.json - always read in debug mode
+            // read gulpfileBundleConfig.json
 
-            if (_bundleConfig == null || _buildConfig!.BuildConfig.StartsWith("Debug"))
+            if (_bundleConfig == null)
             {
                 _bundleConfig = ReadJsonFile<BundleConfigDTO>("gulpfileBundleConfig.json");
-            }
 
-            _bundledAndMinified = _bundleConfig.BundleConfigs.Contains(_buildConfig.BuildConfig);
+                _bundledAndMinified = _bundleConfig.BundleConfigs.Contains(_buildConfig.BuildConfig);
+            }
+            else
+            {
+                // always read the gulpfileBundleConfig.json if we're not in a bundling config
+
+                if (!_bundledAndMinified)
+                {
+                    _bundleConfig = ReadJsonFile<BundleConfigDTO>("gulpfileBundleConfig.json");
+                }
+            }
         }
 
         public override void Process(TagHelperContext context, TagHelperOutput output)
@@ -102,7 +111,7 @@ namespace BundeMinify.TagHelpers
 
             if (_bundledAndMinified)
             {
-                string href = $"{RemoveWwwrootFromPath(_bundleConfig!.BundleFolder)}/{bundle.Name}.min.css";
+                string href = $"/{RemoveWwwrootFromPath(_bundleConfig!.BundleFolder)}/{bundle.Name}.min.css";
                 href = _fileVersionProvider.AddFileVersionToPath(null, href);
                 html = $"<link rel='stylesheet' href='{href}'>";
             }
@@ -112,7 +121,7 @@ namespace BundeMinify.TagHelpers
                 {
                     string href = RemoveWwwrootFromPath(sourceFile);
                     href = _fileVersionProvider.AddFileVersionToPath(null, href);
-                    html += $"<link rel='stylesheet' href='{href}'>" + Environment.NewLine;
+                    html += $"<link rel='stylesheet' href='/{href}'>" + Environment.NewLine;
                 }
             }
 
@@ -130,7 +139,7 @@ namespace BundeMinify.TagHelpers
 
             if (_bundledAndMinified)
             {
-                string src = $"{RemoveWwwrootFromPath(_bundleConfig!.BundleFolder)}/{bundle.Name}.min.js";
+                string src = $"/{RemoveWwwrootFromPath(_bundleConfig!.BundleFolder)}/{bundle.Name}.min.js";
                 src = _fileVersionProvider.AddFileVersionToPath(null, src);
                 html = $"<script src='{src}'></script>";
             }
@@ -140,7 +149,7 @@ namespace BundeMinify.TagHelpers
                 {
                     string src = RemoveWwwrootFromPath(sourceFile);
                     src = _fileVersionProvider.AddFileVersionToPath(null, src);
-                    html += $"<script src='{src}'></script>" + Environment.NewLine;
+                    html += $"<script src='/{src}'></script>" + Environment.NewLine;
                 }
             }
 
