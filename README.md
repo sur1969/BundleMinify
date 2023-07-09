@@ -37,7 +37,7 @@ Add [gulpfileBundleConfig.json](https://github.com/sur1969/BundeMinify/blob/mast
       ]
     }
  
-*Note, wildcards in file paths are not currently supported.*  
+*Note, wildcards in file paths are not supported. Any updates to this file will **require a re-build** for any changes to take effect.*  
 **BundleFolder** : the folder that bundles will be saved to.  
 **BundleConfigs** : the configurations when bundling will happen. By adding "Debug" to this list you can view bundling in action while in the Debug configuration.  
 **Bundles** : the list of bundles. Each bundle should have a unique name. A bundle can consist of either or both of CssFile and JsFiles.  
