@@ -1,6 +1,6 @@
 # Bundle & Minify Css and Javascript
 
-The .net 7.0 bundling & minification solution didn't work - I'm looking at you WebOptimizer. Our requirement was simple, bundle & minify files in Release config and **do not** when in Debug config.
+The .net 7.0 bundling & minification solution didn't work - I'm looking at you WebOptimizer. This **will** bundle & minify files in Release config and **will not** in Debug config.
 
 ## How to get it working!
 
