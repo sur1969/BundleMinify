@@ -74,5 +74,5 @@ Alternatively, to always run pre/post build events you should unload the project
 6. Add file [BundleTagHelper.cs](https://github.com/sur1969/BundeMinify/blob/master/BundeMinify/TagHelpers/BundleTagHelper.cs) to folder **TagHelpers** at the project root. **Update namespace** to match your project.
    Consume tag helpers for your project by editing file **/Pages/_ViewImports.cshtml** and adding:
 >  @addTagHelper *, [your project assembly name]
-7. Lastly, check the "bundle-and-minify" task is setup correctly:  
+7. Lastly, check the "bundle-and-minify" gulp task is setup correctly:  
 Open **Task Runner Explorer** -> Gulpfile.ts -> Tasks -> right click **bundle-and-minify** -> Bindings -> check that **After Build** is selected.
