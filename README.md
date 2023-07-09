@@ -37,9 +37,10 @@ Add [gulpfileBundleConfig.json](https://github.com/sur1969/BundeMinify/blob/mast
       ]
     }
  
-*Note, wildcards in file paths are not currently supported. Either or both of CssFIles and JsFIles need specified.*  
-Option **"BundleFolder"** : specify the folder that all bundles will be saved to.  
-Option **"BundleConfigs"** : The list of configurations when bundling will happen. By adding "Debug" to this list you can view bundling in action while in the Debug configuration.
+*Note, wildcards in file paths are not currently supported.*  
+**BundleFolder** : the folder that bundles will be saved to.  
+**BundleConfigs** : the configurations when bundling will happen. By adding "Debug" to this list you can view bundling in action while in the Debug configuration.  
+**Bundles** : the list of bundles. Each bundle should have a unique name. A bundle can consist of either or both of CssFile and JsFiles.  
 
 ## The painful part follows but only needs to be done once:
 
@@ -70,7 +71,7 @@ Alternatively, to always run pre/post build events you should unload the project
         ]
 
 5. Add NuGet package **Newtonsoft.Json**
-6. Add file [BundleTagHelper.cs](https://github.com/sur1969/BundeMinify/blob/master/BundeMinify/TagHelpers/BundleTagHelper.cs) to folder **TagHelpers** at the project root. Update namespace to match your project.
+6. Add file [BundleTagHelper.cs](https://github.com/sur1969/BundeMinify/blob/master/BundeMinify/TagHelpers/BundleTagHelper.cs) to folder **TagHelpers** at the project root. **Update namespace** to match your project.
    Consume this tag helper for your project by editing file **/Pages/_ViewImports.cshtml** and adding:
 >  @addTagHelper *, [your project assembly name]
 7. Lastly, check the "bundle-and-minify" task is setup correctly:
