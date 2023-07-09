@@ -32,15 +32,6 @@ namespace BundeMinify.TagHelpers
 
                 _bundledAndMinified = _bundleConfig.BundleConfigs.Contains(_buildConfig.BuildConfig);
             }
-            else
-            {
-                // always read the gulpfileBundleConfig.json if we're not in a bundling config
-
-                if (!_bundledAndMinified)
-                {
-                    _bundleConfig = ReadJsonFile<BundleConfigDTO>("gulpfileBundleConfig.json");
-                }
-            }
         }
 
         public override void Process(TagHelperContext context, TagHelperOutput output)
