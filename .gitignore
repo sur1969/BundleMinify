@@ -361,9 +361,9 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
-/BundeMinify/package-lock.json
-/BundeMinify/gulpfile.js
-/BundeMinify/gulpfile.js.map
-/BundeMinify/wwwroot/Bundles/site.min.css
-/BundeMinify/wwwroot/Bundles/site.min.js
-/BundeMinify/gulpfileBuildConfig.json
+/BundleMinify/package-lock.json
+/BundleMinify/gulpfile.js
+/BundleMinify/gulpfile.js.map
+/BundleMinify/wwwroot/Bundles/site.min.css
+/BundleMinify/wwwroot/Bundles/site.min.js
+/BundleMinify/gulpfileBuildConfig.json
