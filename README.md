@@ -13,7 +13,7 @@ When bundled this will output:
     <link rel="stylesheet" href="Bundles/site.min.css?v=...">
     <script src="Bundles/site.min.js?v=..."></script>
 
-Add [gulpfileBundleConfig.json](https://github.com/sur1969/BundeMinify/blob/master/BundeMinify/gulpfileBundleConfig.json) to the root of your project containing the bundle data, e.g.:
+Add [gulpfileBundleConfig.json](https://github.com/sur1969/BundleMinify/blob/master/BundleMinify/gulpfileBundleConfig.json) to the root of your project containing the bundle data, e.g.:
 
     {
       "BundleFolder": "wwwroot/Bundles",
@@ -44,7 +44,7 @@ Add [gulpfileBundleConfig.json](https://github.com/sur1969/BundeMinify/blob/mast
 
 ## The painful part follows but only needs to be done once:
 
-1. Add files [gulpfile.d.ts](https://github.com/sur1969/BundeMinify/blob/master/BundeMinify/gulpfile.d.ts)  and [gulpfile.ts](https://github.com/sur1969/BundeMinify/blob/master/BundeMinify/gulpfile.ts) to the root of your project
+1. Add files [gulpfile.d.ts](https://github.com/sur1969/BundleMinify/blob/master/BundleMinify/gulpfile.d.ts)  and [gulpfile.ts](https://github.com/sur1969/BundleMinify/blob/master/BundleMinify/gulpfile.ts) to the root of your project
 2. Add Pre-build event to store build configuration i.e. Debug or Release :
 
 > Right click project -> Properties -> Build -> Events -> Pre-build
@@ -71,7 +71,7 @@ Alternatively, to always run pre/post build events you should unload the project
         ]
 
 5. Add NuGet package **Newtonsoft.Json**
-6. Add file [BundleTagHelper.cs](https://github.com/sur1969/BundeMinify/blob/master/BundeMinify/TagHelpers/BundleTagHelper.cs) to folder **TagHelpers** at the project root.
+6. Add file [BundleTagHelper.cs](https://github.com/sur1969/BundleMinify/blob/master/BundleMinify/TagHelpers/BundleTagHelper.cs) to folder **TagHelpers** at the project root.
    Consume tag helpers for your project by editing file **/Pages/_ViewImports.cshtml** and adding:
 >  @addTagHelper *, [your project assembly name]
 7. Lastly, check the "bundle-and-minify" gulp task is setup correctly:  
