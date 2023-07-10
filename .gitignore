@@ -368,3 +368,4 @@ FodyWeavers.xsd
 /BundleMinify/wwwroot/Bundles/site.min.js
 /BundleMinify/gulpfileBuildConfig.json
 /BundleMinify/gulpfileBuildConfig.json
+/BundleMinify/gulpfile.js
