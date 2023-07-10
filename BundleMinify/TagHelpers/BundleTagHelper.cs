@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using Newtonsoft.Json;
 
-namespace BundeMinify.TagHelpers
+namespace BundleMinify.TagHelpers
 {
     public class BundleTagHelper : TagHelper
     {
