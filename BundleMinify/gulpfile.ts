@@ -7,7 +7,6 @@ import uglify = require('gulp-uglify');
 import cleanCss = require('gulp-clean-css');
 import del = require('del');
 
-const _cleanupTaskNames: string[] = [];
 const _cssTaskNames: string[] = [];
 const _jsTaskNames: string[] = [];
 
@@ -19,6 +18,8 @@ const _bundleAndMinify: boolean = _bundleConfig.BundleConfigs.indexOf(_buildConf
 
 gulp.task('bundle-and-minify', (cb) => {
     if (_bundleAndMinify) {
+        createCleanupTask();
+
         for (let i = 0; i < _bundleConfig.Bundles.length; i++) {
             const bundle = _bundleConfig.Bundles[i];
 
@@ -31,7 +32,7 @@ gulp.task('bundle-and-minify', (cb) => {
             }
         }
 
-        return gulp.series(_cleanupTaskNames, _cssTaskNames, _jsTaskNames)(cb);
+        return gulp.series("CleanupTask", _cssTaskNames, _jsTaskNames)(cb);
     }
     else {
         return cb();
@@ -52,12 +53,6 @@ function createCssTask(bundleName: string, files: string[]) {
             .pipe(gulp.dest(_bundleConfig.BundleFolder));
     });
     _cssTaskNames.push(destFileName);
-
-    const cleanupTaskName = `${destFileName}.cleanup`;
-    gulp.task(cleanupTaskName, () => {
-        return del(destFileName);
-    });
-    _cleanupTaskNames.push(cleanupTaskName);
 }
 
 
@@ -74,10 +69,15 @@ function createJsTask(bundleName: string, files: string[]) {
             .pipe(gulp.dest(_bundleConfig.BundleFolder));
     });
     _jsTaskNames.push(destFileName);
+}
 
-    const cleanupTaskName = `${destFileName}.cleanup`;
-    gulp.task(cleanupTaskName, () => {
-        return del(destFileName);
+
+/*
+    Utilities
+*/
+
+function createCleanupTask() {
+    gulp.task("CleanupTask", () => {
+        return del(_bundleConfig.BundleFolder);
     });
-    _cleanupTaskNames.push(cleanupTaskName);
 }
