@@ -1,11 +1,11 @@
 /// <binding AfterBuild='bundle-and-minify' />
 /// <reference types="./gulpfile" />
 
-import gulp = require('gulp');
-import concat = require('gulp-concat');
-import uglify = require('gulp-uglify');
-import cleanCss = require('gulp-clean-css');
-import del = require('del');
+const gulp = require('gulp');
+const concat = require('gulp-concat');
+const uglify = require('gulp-uglify');
+const cleanCss = require('gulp-clean-css');
+const del = require('del');
 
 const _cleanupTasks: string[] = [];
 const _cssTasks: string[] = [];
