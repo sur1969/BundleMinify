@@ -7,8 +7,9 @@ import uglify = require('gulp-uglify');
 import cleanCss = require('gulp-clean-css');
 import del = require('del');
 
-const _cssTaskNames: string[] = [];
-const _jsTaskNames: string[] = [];
+const _cleanupTasks: string[] = [];
+const _cssTasks: string[] = [];
+const _jsTasks: string[] = [];
 
 
 const _buildConfig: BuildConfigDTO = require('./gulpfileBuildConfig.json'); // this will tell us which configuration we're in i.e Debug or Release
@@ -32,7 +33,7 @@ gulp.task('bundle-and-minify', (cb) => {
             }
         }
 
-        return gulp.series("CleanupTask", _cssTaskNames, _jsTaskNames)(cb);
+        return gulp.series(_cleanupTasks, _cssTasks, _jsTasks)(cb);
     }
     else {
         return cb();
@@ -52,7 +53,7 @@ function createCssTask(bundleName: string, files: string[]) {
             .pipe(cleanCss())
             .pipe(gulp.dest(_bundleConfig.BundleFolder));
     });
-    _cssTaskNames.push(destFileName);
+    _cssTasks.push(destFileName);
 }
 
 
@@ -68,7 +69,7 @@ function createJsTask(bundleName: string, files: string[]) {
             .pipe(uglify())
             .pipe(gulp.dest(_bundleConfig.BundleFolder));
     });
-    _jsTaskNames.push(destFileName);
+    _jsTasks.push(destFileName);
 }
 
 
@@ -77,7 +78,9 @@ function createJsTask(bundleName: string, files: string[]) {
 */
 
 function createCleanupTask() {
-    gulp.task("CleanupTask", () => {
+    const taskName = "cleanup task";
+    gulp.task(taskName, () => {
         return del(_bundleConfig.BundleFolder);
     });
+    _cleanupTasks.push(taskName);
 }
